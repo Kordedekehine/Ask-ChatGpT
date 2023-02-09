@@ -4,7 +4,7 @@ public class ChatGptRoutes {
 
     public static final String AUTHORIZATION = "Authorization";
     public static final String BEARER = "Bearer ";
-    public static final String API_KEY = "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";
+    public static final String API_KEY = "";
     public static final String MODEL = "text-davinci-003";
     public static final Integer MAX_TOKEN = 200;
     public static final Integer TEMPERATURE = 1;
