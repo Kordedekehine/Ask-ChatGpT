@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
+@Slf4j
 public class QuestionServiceImpl implements QuestionService {
 
     public static RestTemplate restTemplate = new RestTemplate();
@@ -21,6 +22,7 @@ public class QuestionServiceImpl implements QuestionService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType(ChatGptRoutes.MEDIA_TYPE));
         headers.add(ChatGptRoutes.AUTHORIZATION, ChatGptRoutes.BEARER + ChatGptRoutes.API_KEY);
+        log.info(requireRequestDto);
         return new HttpEntity<>(requireRequestDto, headers);
     }
 
@@ -34,14 +36,8 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public RequireResponseDto askQuestion(QuestionRequestDto questionRequestDto) {
-        return this.getResponse(
-                this.buildHttpEntity(
-                        new RequireRequestDto(
-                                ChatGptRoutes.MODEL,
-                                questionRequestDto.getMessage(),
-                                ChatGptRoutes.TEMPERATURE,
-                                ChatGptRoutes.MAX_TOKEN,
-                                ChatGptRoutes.TOP_P)));
+        return this.getResponse(this.buildHttpEntity(
+     new RequireRequestDto(ChatGptRoutes.MODEL, questionRequestDto.getMessage(), ChatGptRoutes.TEMPERATURE, ChatGptRoutes.MAX_TOKEN, ChatGptRoutes.TOP_P)));
     }
     }
 
